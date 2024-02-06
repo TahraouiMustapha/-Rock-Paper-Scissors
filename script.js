@@ -1,14 +1,10 @@
 
 function getComputerChoice() {
-    let rand = Math.floor(Math.random() * 100)  ;
-    if(rand <= 30) {
-        return "rock";
-    } else if(rand > 30 && rand <= 60) {
-        return "paper";
-    } else {
-        return "scissors";
-    }
+    const computerChoices = ["rock","paper","scissors"];
+    let index = Math.floor(Math.random() * computerChoices.length);
+    return computerChoices[index];
 }
+
 
 function playRound(playerSelection,computerSelection) {
     let res;
