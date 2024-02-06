@@ -10,45 +10,44 @@ function getComputerChoice() {
     }
 }
 
-function winner(selection1,selection2) {
-    switch(selection1) {
+
+function playRound(playerSelection,computerSelection) {
+    let res;
+    switch(playerSelection) {
         case "rock":
-            if(selection2 == "scissors") {
-                return "Win";
-            } else if( selection2 == "paper") {
-                return "Lose";
+            if(computerSelection == "scissors") {
+                res="Win";
+            } else if( computerSelection == "paper") {
+                res="Lose";
             } else {
-                return "nill";
+                res = "draw"
             }
        
         case "scissors":
-            if(selection2 == "paper") {
-                return "Win";
-            } else if( selection2 == "rock") {
-                return "Lose";
+            if(computerSelection == "paper") {
+                res="Win";
+            } else if( computerSelection == "rock") {
+                res="Lose";
             } else {
-                return "nill";
+                res = "draw"
             }
        
         case "paper":
-            if(selection2 == "rock") {
-                return "Win";
-            } else if( selection2 == "scissors") {
-                return "Lose";
+            if(computerSelection == "rock") {
+                res="Win";
+            } else if( computerSelection == "scissors") {
+                res="Lose";
             } else {
-                return "nill";
-            }
+                res = "draw"
+            }            
     }
-}
-
-function playRound(playerSelection,computerSelection) {
-    if(winner(playerSelection,computerSelection) == "Win") {
-        return `\"You Win! ${playerSelection} beats ${computerSelection}\"`;
-    } else if(winner(playerSelection,computerSelection) == "Lose"){
-        return `\"You Lose! ${computerSelection} beats ${playerSelection}\"`;
+    if(res == "Win") {
+        return `\"You ${res}! ${playerSelection} beats ${computerSelection}\"`;
+    } else if(res == "Lose") {
+        return `\"You ${res}! ${computerSelection} beats ${playerSelection}\"`;
     } else {
-        return "draw!";
-    }
+        return `\"${res}!\"`;
+    }   
 }
 
 const playerSelection = "rock";
