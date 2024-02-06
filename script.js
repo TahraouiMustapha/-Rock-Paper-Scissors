@@ -10,9 +10,10 @@ function getComputerChoice() {
     }
 }
 
-
 function playRound(playerSelection,computerSelection) {
     let res;
+    playerSelection = playerSelection.toLowerCase();
+    computerSelection = computerSelection.toLowerCase();
     switch(playerSelection) {
         case "rock":
             if(computerSelection == "scissors") {
@@ -41,16 +42,35 @@ function playRound(playerSelection,computerSelection) {
                 res = "draw"
             }            
     }
-    if(res == "Win") {
-        return `\"You ${res}! ${playerSelection} beats ${computerSelection}\"`;
-    } else if(res == "Lose") {
-        return `\"You ${res}! ${computerSelection} beats ${playerSelection}\"`;
-    } else {
-        return `\"${res}!\"`;
-    }   
+    return res;
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
+function playGame(){
+    let userScore = 0 , computerScore = 0;
 
-console.log(playRound(playerSelection.toLowerCase(),computerSelection.toLowerCase()));
+    for(let i=0 ; i<5 ; i++) {
+        let userChoice = prompt("enter your choice: Rock | Paper | Scissors");
+        let computerChoice = getComputerChoice();
+
+        if(playRound(userChoice,computerChoice) == "Win") {
+            userScore++;
+            console.log(`You Win this round:\nyour score: ${userScore} \tcomputer Score:${computerScore}`);
+        } else if (playRound(userChoice,computerChoice) == "Lose") {
+            computerScore++;
+            console.log(`You Lose this round:\nyour score: ${userScore} \t computer Score:${computerScore}`);
+        } else {
+            console.log("Draw! in this Round");
+        } 
+    }
+
+    console.log("-----------------------------");
+    if (userScore > computerScore) {
+        console.log(`You Win The Game : \nyour score: ${userScore}`);
+    } else if (userScore < computerScore) {
+        console.log(`You Lose The Game : \ncomputer score: ${computerScore}`);
+    } else {
+        console.log(` Draw! \n your score: ${userScore} computer score:${computerScore}`);
+    }
+}
+
+playGame();
