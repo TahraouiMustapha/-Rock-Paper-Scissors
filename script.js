@@ -1,3 +1,38 @@
+const rock = document.createElement('button');
+rock.innerText = "Rock";
+
+const paper = document.createElement('button');
+paper.innerText = "paper";
+
+const scissors = document.createElement('button');
+scissors.innerText = "scissors";
+
+document.body.appendChild(rock);
+document.body.appendChild(paper);
+document.body.appendChild(scissors);
+
+let resultDiv = document.createElement('div');
+document.body.appendChild(resultDiv);
+let repos = document.createTextNode("");
+
+let playerScore = 0, computerScore = 0;
+let reposScore = document.createTextNode(`your score :${playerScore} | computer score: ${computerScore}`);
+resultDiv.appendChild(reposScore);
+
+rock.onclick = () => {
+    getResult(playRound("rock", getComputerChoice()));
+    reposScore.nodeValue = `your score :${playerScore} | computer score: ${computerScore}`;
+}
+paper.onclick = () => {
+    getResult(playRound("paper", getComputerChoice()));
+    reposScore.nodeValue = `your score :${playerScore} | computer score: ${computerScore}`;
+}
+scissors.onclick = () => {
+    getResult(playRound("scissors", getComputerChoice()));
+    reposScore.nodeValue = `your score :${playerScore} | computer score: ${computerScore}`;
+}
+
+
 
 function getComputerChoice() {
     const computerChoices = ["rock","paper","scissors"];
@@ -41,32 +76,27 @@ function playRound(playerSelection,computerSelection) {
     return res;
 }
 
-function playGame(){
-    let userScore = 0 , computerScore = 0;
+function getResult(result){
 
-    for(let i=0 ; i<5 ; i++) {
-        let userChoice = prompt("enter your choice: Rock | Paper | Scissors");
-        let computerChoice = getComputerChoice();
-
-        if(playRound(userChoice,computerChoice) == "Win") {
-            userScore++;
-            console.log(`You Win this round:\nyour score: ${userScore} \tcomputer Score:${computerScore}`);
-        } else if (playRound(userChoice,computerChoice) == "Lose") {
+        if(result == "Win") {
+            playerScore++;
+            if (playerScore === 5) {
+                repos.nodeValue = "You Are Winner this game";
+                resultDiv.appendChild(repos);
+            } else {
+                repos.nodeValue = result + " the game" ;
+                resultDiv.appendChild(repos);
+            }
+        } else if (result == "Lose") {
             computerScore++;
-            console.log(`You Lose this round:\nyour score: ${userScore} \t computer Score:${computerScore}`);
-        } else {
-            console.log("Draw! in this Round");
-        } 
-    }
-
-    console.log("-----------------------------");
-    if (userScore > computerScore) {
-        console.log(`You Win The Game : \nyour score: ${userScore}`);
-    } else if (userScore < computerScore) {
-        console.log(`You Lose The Game : \ncomputer score: ${computerScore}`);
-    } else {
-        console.log(` Draw! \n your score: ${userScore} computer score:${computerScore}`);
-    }
+            if (computerScore === 5) {
+                repos.nodeValue = "You Are Loser this game";
+                resultDiv.appendChild(repos);
+            } else {
+                repos.nodeValue = result + " the game" ;
+                resultDiv.appendChild(repos);
+            }
+        }  
 }
 
-playGame();
+
